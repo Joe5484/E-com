@@ -1,0 +1,227 @@
+<section class="container py-16 mx-auto px-4">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
+
+        <div class="hidden lg:block">
+            <div class="text-center space-y-6">
+                <img src="/srcimag/imgi_2_2e5810ff3e-e750761ebcd4ae5907db.png" alt="FreshCart illustration"
+                    class="w-full h-96 object-cover rounded-2xl shadow-lg">
+                <div class="space-y-4">
+                    <h2 class="text-3xl font-bold text-gray-800">
+                        FreshCart - Your One-Stop Shop for Fresh Products
+                    </h2>
+                    <p class="text-lg text-gray-600">
+                        Join thousands of happy customers who trust FreshCart for their daily grocery needs
+                    </p>
+
+                    <div class="flex items-center justify-center gap-8 text-sm text-gray-500">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-truck text-green-600"></i>
+                            <span>Free Delivery</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-shield-halved text-green-600"></i>
+                            <span>Secure Payment</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-clock text-green-600"></i>
+                            <span>24/7 Support</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full">
+            <div class="bg-white rounded-2xl shadow-xl p-8 lg:p-12">
+
+                <div class="text-center mb-8">
+                    <div class="flex items-center justify-center mb-4">
+                        <span class="text-3xl font-bold text-green-600">
+                            Fresh<span class="text-gray-800">Cart</span>
+                        </span>
+                    </div>
+                    <h1 class="text-2xl font-bold text-gray-800 mb-2">Welcome Back!</h1>
+                    <p class="text-gray-600">Sign in to continue your fresh shopping experience</p>
+                </div>
+
+                <div class="space-y-3 mb-6">
+                    <button type="button"
+                        class="w-full flex items-center justify-center gap-3 py-3 px-4 border-2 border-gray-200 rounded-xl hover:border-green-300 hover:bg-green-50 transition-all duration-200">
+                        <i class="fa-brands fa-google text-red-500 text-lg"></i>
+                        <span class="font-medium text-gray-700">Continue with Google</span>
+                    </button>
+                    <button type="button"
+                        class="w-full flex items-center justify-center gap-3 py-3 px-4 border-2 border-gray-200 rounded-xl hover:border-green-300 hover:bg-green-50 transition-all duration-200">
+                        <i class="fa-brands fa-facebook text-blue-600 text-lg"></i>
+                        <span class="font-medium text-gray-700">Continue with Facebook</span>
+                    </button>
+                </div>
+
+                <div class="relative my-6">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-gray-200"></div>
+                    </div>
+                    <div class="relative flex justify-center text-sm">
+                        <span class="px-4 bg-white text-gray-500 font-medium">OR CONTINUE WITH EMAIL</span>
+                    </div>
+                </div>
+
+                <!-- Form -->
+                <form class="space-y-5" [formGroup]="loginForm" (submit)="sginIn()">
+
+                    <!-- Email -->
+                    <div>
+                        <div class="flex flex-col gap-2">
+                            <label for="email" class="text-sm font-medium text-gray-700">Email*</label>
+                            <input formControlName="email" id="email" type="email" name="email"
+                                placeholder="Enter youer email" autocomplete="email"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 text-sm">
+                        </div>
+                        @if (loginForm.get('email')?.errors && loginForm.get('email')?.touched) {
+                        <div class="flex mt-2 p-4 mb-4 text-sm text-fg-danger-strong rounded-base bg-danger-soft border border-danger-subtle"
+                            role="alert">
+                            <svg class="w-4 h-4 me-2 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
+                            <span class="sr-only">Danger</span>
+                            <div>
+                                <span class="font-medium">Ensure that these requirements are met:</span>
+                                <ul class="mt-2 list-disc list-outside space-y-1 ps-2.5">
+                                    @if (loginForm.get('email')?.getError('required')) {
+                                    <li>Email is Requird</li>
+                                    }
+                                    @if (loginForm.get('email')?.getError('email')) {
+                                    <li>Must be a valid email (ex:rimanadel4@gmail.com)</li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                        }
+                    </div>
+
+                    <!-- Password -->
+                    <div>
+
+                        <div class="flex flex-col gap-2">
+                            <div class="flex justify-between relative">
+                                <label for="password" class="text-sm font-medium text-gray-700">Password*</label>
+                                <a routerLink="/forgot-Password"
+                                    class="text-green-600 hover:text-green-700 ml-2 font-semibold">
+                                    Forgot Password?
+                                </a>
+                            </div>
+                            <div class="relative">
+                                <input formControlName="password" id="password"
+                                    [type]="isHidden() ? 'password' : 'text'" name="password"
+                                    placeholder="Enter your password.." autocomplete="new-password"
+                                    class="w-full px-4 py-3 pl-10 pr-12 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 text-sm" />
+                                <i
+                                    class="fa-solid fa-lock absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+                                <button type="button" (click)="isHidden.set(!isHidden())"
+                                    class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors duration-200">
+                                    <i [class]="isHidden() ? 'fa-regular fa-eye' : 'fa-regular fa-eye-slash'"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        @if (loginForm.get('password')?.errors && loginForm.get('password')?.touched) {
+                        <div class="flex mt-2 p-4 mb-4 text-sm text-fg-danger-strong rounded-base bg-danger-soft border border-danger-subtle"
+                            role="alert">
+                            <svg class="w-4 h-4 me-2 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
+                            <div>
+                                <span class="font-medium">Ensure that these requirements are met:</span>
+                                <ul class="mt-2 list-disc list-outside space-y-1 ps-2.5">
+                                    @if (loginForm.get('password')?.getError('required')) {
+                                    <li>Password is Required</li>
+                                    }
+                                    @if (loginForm.get('password')?.getError('pattern')) {
+                                    <li>At least 1 uppercase letter (A-Z)</li>
+                                    <li>At least 1 lowercase letter (a-z)</li>
+                                    <li>At least 1 number (0-9)</li>
+                                    <li>At least 1 special character (#?!@$%^&*-)</li>
+                                    <li>Minimum 8 characters</li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                        }
+                    </div>
+
+                    <div>
+                        @if (errorMass()) {
+                        <div class="flex items-start sm:items-center p-4 mb-4 text-sm text-fg-danger-strong rounded-base bg-danger-soft"
+                            role="alert">
+                            <svg class="w-4 h-4 me-2 shrink-0 mt-0.5 sm:mt-0" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
+                            <p> {{errorMass()}} </p>
+                        </div>
+                        }
+
+                        @if(successMass()) {
+                        <div class="flex items-start sm:items-center p-4 mb-4 text-sm text-fg-success-strong rounded-base bg-success-soft border border-success-subtle"
+                            role="alert">
+                            <svg class="w-4 h-4 me-2 shrink-0 mt-0.5 sm:mt-0" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
+                            <p> {{successMass()}} </p>
+                        </div>
+                        }
+
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <input id="terms" type="checkbox" name="terms" class="w-4 h-4 accent-green-600">
+                        <label for="terms" class="text-sm text-gray-600 ml-2">Keep me signed in</label>
+                    </div>
+                    <button type="submit" [disabled]="loginForm.invalid"
+                        class="w-full flex justify-center items-center gap-2 bg-green-600 hover:bg-green-700 text-white py-3 px-6 rounded-lg font-medium transition-colors duration-200 cursor-pointer disabled:cursor-not-allowed default:bg-green-200  ">
+                        Sign In
+                    </button>
+                </form>
+
+                <div class="text-center mt-8 pt-6 border-t border-gray-100">
+                    <p class="text-gray-600">
+                        New to FreshCart?
+                        <a routerLink="/register" class="text-green-600 hover:text-green-700 ml-2 font-semibold">Create
+                            an account</a>
+                    </p>
+                </div>
+
+                <div class="flex items-center justify-center gap-6 mt-6 text-xs text-gray-500">
+                    <div class="flex items-center gap-1">
+                        <i class="fa-solid fa-lock"></i>
+                        <span>SSL Secured</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <i class="fa-solid fa-users"></i>
+                        <span>50K+ Users</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <i class="fa-solid fa-star"></i>
+                        <span>4.9 Rating</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>

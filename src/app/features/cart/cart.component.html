@@ -1,0 +1,285 @@
+@if(cartDetails().data?.products?.length){
+<main class="bg-gray-50 min-h-screen py-8">
+    <div class="container mx-auto px-4">
+
+        <div class="mb-8">
+
+            <nav class="flex items-center gap-2 text-sm text-gray-500 mb-4">
+                <a href="/" class="hover:text-green-600 transition-colors duration-200">Home</a>
+                <span>/</span>
+                <span class="text-gray-900 font-medium">Shopping Cart</span>
+            </nav>
+
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900 flex items-center gap-3">
+                        <span class="bg-green-600 text-white w-12 h-12 rounded-xl flex items-center justify-center">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </span>
+                        Shopping Cart
+                    </h1>
+                    <p class="text-gray-500 mt-2">
+                        You have <span class="font-semibold text-green-600"> {{cartDetails().numOfCartItems}} items
+                        </span> in your cart
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-2">
+                <div class="space-y-4">
+
+                    @for (item of cartDetails().data?.products; track item._id) {
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 sm:p-5">
+                        <div class="flex gap-4 sm:gap-6">
+
+                            <!-- Product Image -->
+                            <a href="/products/6428e5e6d    c1175abc65ca084" class="relative shrink-0 group">
+                                <div
+                                    class="w-28 h-28 sm:w-32 sm:h-32 rounded-xl bg-gray-50 p-3 border border-gray-100 overflow-hidden">
+                                    <img [src]="item.product.imageCover" alt="Woman Standart Fit Knitted Cardigan"
+                                        class="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110">
+                                </div>
+                            </a>
+
+                            <!-- Product Info -->
+                            <div class="flex-1 min-w-0 flex flex-col">
+
+                                <!-- Title + Badge -->
+                                <div class="mb-3">
+                                    <a href="/products/6428e5e6dc1175abc65ca084" class="group/title">
+                                        <h3
+                                            class="font-semibold text-gray-900 hover:text-green-600 transition-colors duration-200 leading-relaxed text-base sm:text-lg">
+                                            {{item.product.title}}
+                                        </h3>
+                                    </a>
+                                    <div class="flex items-center gap-2 mt-2">
+                                        <span
+                                            class="inline-block px-2.5 py-1 bg-green-50 text-green-700 text-xs font-medium rounded-full">
+                                            Women's Fashion
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- Price -->
+                                <div class="mb-4">
+                                    <span class="text-green-600 font-bold text-lg">{{item.price}} EGP</span>
+                                </div>
+
+                                <!-- Quantity + Total + Delete -->
+                                <div class="mt-auto flex flex-wrap items-center justify-between gap-4">
+
+                                    <div class="flex items-center bg-gray-50 rounded-xl p-1 border border-gray-200">
+                                        <button (click)="updeateItemQuantity(item.product._id, item.count-1)"
+                                            class="h-8 w-8 rounded-lg bg-white shadow-sm flex items-center justify-center text-gray-500 hover:text-gray-700 disabled:opacity-40 transition-all duration-200">
+                                            <i class="fa-solid fa-minus text-xs"></i>
+                                        </button>
+
+                                        <select [value]="item.count"
+                                            (change)="updeateItemQuantity(item.product._id, +$any($event.target).value)"
+                                            class="w-16 text-center font-bold text-gray-900 bg-transparent border-0 focus:outline-none focus:ring-0 cursor-pointer appearance-none">
+                                            @for (num of [1,2,3,4,5,6,7,8,9,10]; track num) {
+                                            <option [value]="num" [selected]="num === item.count">{{num}}</option>
+                                            }
+                                        </select>
+
+                                        <button (click)="updeateItemQuantity(item.product._id, item.count+1)"
+                                            class="h-8 w-8 rounded-lg bg-green-600 shadow-sm flex items-center justify-center text-white hover:bg-green-700 transition-all duration-200">
+                                            <i class="fa-solid fa-plus text-xs"></i>
+                                        </button>
+                                    </div>
+
+
+
+
+                                    <!-- Total + Delete -->
+                                    <div class="flex items-center gap-4">
+                                        <div class="text-right">
+                                            <p class="text-xs text-gray-400 mb-0.5">Total</p>
+                                            <p class="text-xl font-bold text-gray-900">
+                                                {{item.price * item.count}} <span
+                                                    class="text-sm font-medium text-gray-400">EGP</span>
+                                            </p>
+                                        </div>
+                                        <button title="Remove item" (click)="removeItemFromCart(item.product._id)"
+                                            class="h-10 w-10 rounded-xl border border-red-200 bg-red-50 text-red-500 hover:bg-red-500 hover:text-white hover:border-red-500 flex items-center justify-center transition-all duration-200">
+                                            <i class="fa-solid fa-trash text-sm"></i>
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    }
+
+                </div>
+
+                <div class="mt-6 pt-6 border-t border-gray-200 flex items-center justify-between">
+                    <a routerLink="/home"
+                        class="text-green-600 hover:text-green-700 font-medium text-sm flex items-center gap-2 transition-colors duration-200">
+                        <i class="fa-solid fa-arrow-left text-xs"></i>
+                        Continue Shopping
+                    </a>
+                    <button (click)="clearCart()"
+                        class="group flex items-center gap-2 text-sm text-gray-400 hover:text-red-500 transition-colors duration-200">
+                        <i
+                            class="fa-solid fa-trash text-xs group-hover:scale-110 transition-transform duration-200"></i>
+                        <span>Clear all items</span>
+                    </button>
+                </div>
+
+            </div>
+
+            @if (!isLogdIn()) {
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden sticky top-4">
+
+                    <div class="bg-gray-900 p-5">
+                        <h2 class="text-white font-bold text-lg">Order Summary</h2>
+                    </div>
+                    <div class="p-5 space-y-4">
+
+                        <div class="flex justify-between text-gray-600">
+                            <span>Subtotal {{cartDetails().numOfCartItems}} Items</span>
+                            <span class="font-semibold">{{cartDetails().data?.totalCartPrice}} EGP</span>
+                        </div>
+
+                        <div class="flex justify-between text-gray-600">
+                            <span>Shipping</span>
+                            <span class="text-green-600 font-medium">Calculated at checkout</span>
+                        </div>
+
+                        <hr class="border-gray-200">
+
+                        <div class="flex justify-between text-lg font-bold">
+                            <span>Estimated Total</span>
+                            <span class="text-green-600">{{cartDetails().data?.totalCartPrice}} EGP</span>
+                        </div>
+
+                        <div class="pt-4 space-y-3">
+                            <a routerLink="/chacout"
+                                class="w-full flex items-center justify-center gap-2 bg-green-600 text-white py-3.5 rounded-xl font-semibold hover:bg-green-700 transition-all duration-200">
+                                <i class="fa-solid fa-user"></i>
+                                Login to Checkout
+                            </a>
+                            <p class="text-xs text-gray-400 text-center">
+                                Don't have an account?
+                                <a href="/signup?redirect=/cart" class="text-green-600 hover:underline">Sign up</a>
+                            </p>
+                        </div>
+
+                        <div class="pt-4 border-t border-gray-100 space-y-2">
+                            <p class="text-xs text-gray-500">✓ Your cart items will be saved</p>
+                            <p class="text-xs text-gray-500">✓ Track your orders easily</p>
+                            <p class="text-xs text-gray-500">✓ Access exclusive member deals</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            }
+            @if (isLogdIn()) {
+            <section class="bg-white rounded-xl p-6 w-full max-w-sm flex flex-col gap-5 shadow">
+
+                <!-- Free Shipping Banner -->
+                <div class="bg-green-50 rounded-lg p-4 flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+                        <i class="fa-solid fa-truck text-green-600 text-base"></i>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-green-700 text-sm">Free Shipping!</p>
+                        <p class="text-green-600 text-xs">You qualify for free delivery</p>
+                    </div>
+                </div>
+
+                <!-- Price Breakdown -->
+                <div class="flex flex-col gap-3">
+                    <div class="flex justify-between">
+                        <span class="text-gray-500 text-sm">Subtotal {{cartDetails().numOfCartItems}} items</span>
+                        <span class="font-medium text-gray-900 text-sm">{{cartDetails().data?.totalCartPrice}} EGP</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-500 text-sm">Shipping</span>
+                        <span class="font-medium text-green-600 text-sm">FREE</span>
+                    </div>
+                    <div class="border-t border-dashed border-gray-200 pt-3 flex justify-between items-baseline">
+                        <span class="font-medium text-gray-900">Total</span>
+                        <div>
+                            <span class="text-2xl font-semibold text-gray-900">{{cartDetails().data?.totalCartPrice}}</span>
+                            <span class="text-xs text-gray-400 ml-1">EGP</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Promo Code Button -->
+                <button
+                    class="w-full flex items-center justify-center gap-2 py-3 border border-dashed border-gray-300 rounded-lg text-gray-500 text-sm font-medium hover:border-green-400 hover:text-green-600 transition-all">
+                    <i class="fa-solid fa-tag text-sm"></i>
+                    <span>Apply Promo Code</span>
+                </button>
+
+                <!-- Checkout Button -->
+                <button class="flex justify-center">
+                    <a [routerLink]="['/chackout',cartDetails().cartId]"
+                        class="w-full bg-green-600 text-white py-4 px-6 rounded-lg font-medium text-base flex items-center justify-center gap-3 hover:bg-green-700 transition-all">
+                        <i class="fa-solid fa-lock text-sm"></i>
+                        <span>Secure Checkout</span>
+                    </a>
+                </button>
+
+                <!-- Trust Badges -->
+                <div class="flex items-center justify-center gap-4 py-1">
+                    <div class="flex items-center gap-1.5">
+                        <i class="fa-solid fa-shield-halved text-green-500 text-sm"></i>
+                        <span class="text-xs text-gray-400">Secure Payment</span>
+                    </div>
+                    <div class="w-px h-4 bg-gray-200"></div>
+                    <div class="flex items-center gap-1.5">
+                        <i class="fa-solid fa-truck text-blue-500 text-sm"></i>
+                        <span class="text-xs text-gray-400">Fast Delivery</span>
+                    </div>
+                </div>
+
+                <!-- Continue Shopping -->
+                <a routerLink="/shop" class="text-center text-green-600 text-sm font-medium hover:text-green-700">
+                    ← Continue Shopping
+                </a>
+
+            </section>
+            }
+
+        </div>
+    </div>
+</main>
+
+}@else {
+
+<div class="min-h-[60vh] flex items-center justify-center px-4">
+
+    <div class="max-w-md text-center">
+
+        <div class="relative mb-8">
+            <div class="w-32 h-32 rounded-full bg-gray-100 flex items-center justify-center mx-auto">
+                <i class="fa-solid fa-box-open text-5xl text-gray-300"></i>
+            </div>
+        </div>
+
+        <h2 class="text-2xl font-bold text-gray-900 mb-3">Your cart is empty</h2>
+        <p class="text-gray-500 mb-8 leading-relaxed">
+            Looks like you haven't added anything to your cart yet.<br />
+            Start exploring our products!
+        </p>
+
+        <a routerLink="/home"
+            class="inline-flex items-center gap-2 bg-green-600 text-white py-3.5 px-8 rounded-xl font-semibold hover:bg-green-700 transition-all duration-200 shadow-lg active:scale-95">
+            Start Shopping
+            <i class="fa-solid fa-arrow-right text-sm"></i>
+        </a>
+
+    </div>
+</div>
+
+}

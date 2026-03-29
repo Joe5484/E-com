@@ -1,0 +1,43 @@
+<section class="py-10 px-4 container mx-auto">
+    <div class="bg-gradient-to-br from-green-600 via-green-500 to-green-400 text-white">
+        <div class="container mx-auto px-4 py-10 sm:py-14">
+
+            <!-- Breadcrumb -->
+            <nav class="flex items-center gap-2 text-sm text-white/70 mb-6 flex-wrap">
+                <a href="/" class="hover:text-white transition-colors duration-200">Home</a>
+                <span class="text-white/40">/</span>
+                <span class="text-white font-medium">All Products</span>
+            </nav>
+
+            <!-- Title -->
+            <div class="flex items-center gap-5">
+                <div
+                    class="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center shadow-xl ring-1 ring-white/30">
+                    <i class="fa-solid fa-box-open text-3xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-3xl sm:text-4xl font-bold tracking-tight">All Products</h1>
+                    <p class="text-white/80 mt-1">Explore our complete product collection</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <span class="mt-5 space-x-5">Showing 40 products</span>
+    <div class="my-20 gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+        @for (prod of productList()| paginate: { id: 'productsPagination',
+        itemsPerPage: pageSize(),
+        currentPage: p(),
+        totalItems: total()}; track prod._id) {
+        <app-product-card [data]="prod"></app-product-card>
+        }
+    </div>
+
+
+    <div class="flex justify-center my-5">
+        <pagination-controls class="my-pagination" id="productsPagination" (pageChange)="pageChanged($event)">
+        </pagination-controls>
+    </div>
+
+
+</section>

@@ -1,0 +1,102 @@
+<div class="container mx-auto px-4 ">
+
+    <!-- Breadcrumb -->
+    <nav class="flex items-center gap-2 text-sm text-gray-400 mb-6 my-5">
+        <a routerLink="/home" class="hover:text-indigo-600">Home</a>
+        <span>/</span>
+        <span class="text-gray-900 font-medium">My Orders</span>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="flex items-center justify-between mb-8 flex-wrap gap-4">
+        <div class="flex items-center gap-4">
+            <div class="w-14 h-14 bg-indigo-600 rounded-2xl flex items-center justify-center">
+                <i class="fa-solid fa-box text-white text-2xl"></i>
+            </div>
+            <div>
+                <h1 class="text-2xl font-semibold text-gray-900">My Orders</h1>
+                <p class="text-sm text-gray-500 mt-0.5">Track and manage your 3 orders</p>
+            </div>
+        </div>
+        <a href="/"
+            class="flex items-center gap-2 text-indigo-600 text-sm font-medium px-4 py-2 rounded-xl bg-indigo-50 hover:bg-indigo-100 transition-all">
+            <i class="fa-solid fa-bag-shopping text-xs"></i>
+            Continue Shopping
+        </a>
+    </div>
+
+    <!-- Orders List -->
+    <div class="flex flex-col gap-4">
+
+        <!-- Order Card 1 -->
+        @for (order of ordersList(); track order._id) {
+        <section
+            class="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md hover:border-gray-200 transition-all duration-300 p-5">
+            <div class="flex gap-5">
+
+                <!-- Product Image -->
+                <div class="w-24 h-24 bg-gray-50 border border-gray-100 rounded-2xl p-2.5 overflow-hidden shrink-0">
+
+                        <img class="w-full h-full object-contain" [src]="order.cartItems[0]?.product?.imageCover" alt="product">
+                </div>
+
+                <!-- Order Info -->
+                <div class="flex-1 min-w-0">
+
+                    <!-- Top Row -->
+                    <div class="flex items-start justify-between gap-3 mb-3">
+                        <div>
+                            <!-- Status Badge -->
+                            <div class="inline-flex items-center gap-1.5 bg-blue-100 px-2.5 py-1 rounded-lg mb-2">
+                                <i class="fa-solid fa-truck text-blue-600 text-xs"></i>
+                                <span class="text-xs font-medium text-blue-600">On the way</span>
+                            </div>
+                            <!-- Order ID -->
+                            <div class="flex items-center gap-1.5">
+                                <i class="fa-solid fa-hashtag text-gray-400 text-xs"></i>
+                                <span class="text-lg font-semibold text-gray-900">{{order.id}}</span>
+                            </div>
+                        </div>
+                        <!-- Payment Icon -->
+                        <div class="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-credit-card text-purple-600"></i>
+                        </div>
+                    </div>
+
+                    <!-- Meta Info -->
+                    <div class="flex flex-wrap items-center gap-3 text-xs text-gray-500 mb-4">
+                        <span class="flex items-center gap-1.5">
+                            <i class="fa-solid fa-calendar-days text-gray-400 text-xs"></i>
+                            {{order.paidAt}}
+                        </span>
+                        <span class="w-1 h-1 bg-gray-300 rounded-full"></span>
+                        <span class="flex items-center gap-1.5">
+                            <i class="fa-solid fa-box text-gray-400 text-xs"></i>
+                            {{order.cartItems?.concat}} items
+                        </span>
+                        <span class="w-1 h-1 bg-gray-300 rounded-full"></span>
+                        <span class="flex items-center gap-1.5">
+                            <i class="fa-solid fa-location-dot text-gray-400 text-xs"></i>
+                            {{order.shippingAddress?.city}}
+                        </span>
+                    </div>
+
+                    <!-- Price + Button -->
+                    <div class="flex items-center justify-between gap-4">
+                        <div>
+                            <span class="text-2xl font-semibold text-gray-900">{{order.totalOrderPrice}}</span>
+                            <span class="text-sm text-gray-400 ml-1">EGP</span>
+                        </div>
+                        <button
+                            class="flex items-center gap-2 bg-gray-100 text-gray-700 px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-gray-200 transition-all">
+                            Details <i class="fa-solid fa-chevron-down text-xs"></i>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        }
+
+    </div>
+</div>

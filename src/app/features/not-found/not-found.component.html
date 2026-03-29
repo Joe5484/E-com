@@ -1,0 +1,104 @@
+<main class="relative h-screen overflow-hidden bg-[#F8FBFB]">
+
+    <section class="absolute inset-0">
+
+        <!-- Apple -->
+        <div class="absolute top-10 left-10 text-green-300 text-4xl animate-bounce">
+            <i class="fa-solid fa-apple-whole"></i>
+        </div>
+
+        <!-- Carrot -->
+        <div class="absolute top-20 right-10 text-green-300 text-3xl animate-bounce delay-200">
+            <i class="fa-solid fa-carrot"></i>
+        </div>
+
+        <!-- Lemon -->
+        <div class="absolute bottom-20 left-10 text-green-300 text-3xl animate-bounce delay-300">
+            <i class="fa-solid fa-lemon"></i>
+        </div>
+
+        <!-- Seedling -->
+        <div class="absolute bottom-10 right-10 text-green-300 text-4xl animate-bounce delay-500">
+            <i class="fa-solid fa-seedling"></i>
+        </div>
+
+        <!-- Blur circle 1 -->
+        <div class="absolute top-0 right-0 w-72 h-72 bg-green-300 opacity-40 rounded-full blur-3xl"></div>
+
+        <!-- Blur circle 2 -->
+        <div class="absolute bottom-0 left-0 w-60 h-60 bg-green-300 opacity-30 rounded-full blur-3xl"></div>
+
+    </section>
+
+    <main class="min-h-screen flex items-center justify-center bg-gray-100">
+
+        <section class="w-full max-w-md text-center">
+
+            <!-- الكارت -->
+            <div class="relative flex justify-center mb-8">
+
+                <!-- blur -->
+                <div class="absolute w-56 h-40 bg-green-100 rounded-3xl blur-2xl"></div>
+
+                <!-- box -->
+                <div class="relative w-56 h-40 bg-white rounded-3xl shadow-lg flex items-center justify-center border">
+
+                    <!-- icon -->
+                    <div class="text-5xl text-green-500">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </div>
+
+                    <!-- 404 circle -->
+                    <div
+                        class="absolute -top-3 -right-3 w-14 h-14 rounded-full bg-green-600 text-white flex items-center justify-center font-bold">
+                        404
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- title -->
+            <div class="mb-6">
+                <div class="text-3xl font-bold mb-2">Oops! Nothing Here</div>
+                <div class="text-gray-500 text-sm">
+                    Looks like this page went out of stock!
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-3 mb-8">
+
+                <button routerLink="/home"
+                    class="bg-green-600 text-white py-3 rounded-xl flex items-center justify-center gap-2 cursor-pointer">
+                    <i class="fa-solid fa-home text-xs"></i>
+                    Home
+                </button>
+
+                <button routerLink="/login"
+                    class="bg-white border py-3 rounded-xl flex items-center justify-center gap-2 cursor-pointer">
+                      <i class="fa-solid fa-arrow-left"></i>
+                    Back
+                </button>
+
+            </div>
+
+            <!-- links -->
+            <div class="bg-white p-4 rounded-2xl shadow">
+
+                <div class="text-xs text-gray-400 mb-3">Popular</div>
+
+                <div class="flex flex-wrap gap-2 justify-center">
+
+                    <div class="bg-green-100 px-3 py-1 rounded-lg text-sm">Products</div>
+                    <div class="bg-gray-100 px-3 py-1 rounded-lg text-sm">Categories</div>
+                    <div class="bg-gray-100 px-3 py-1 rounded-lg text-sm">Deals</div>
+                    <div class="bg-gray-100 px-3 py-1 rounded-lg text-sm">Contact</div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</main>

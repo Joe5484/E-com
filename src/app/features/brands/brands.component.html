@@ -1,0 +1,51 @@
+<section class="bg-purple-500 text-white ">
+    <div class="container mx-auto px-4 py-12">
+        <nav class="flex items-center gap-2 text-sm text-white mb-6">
+            <a class="hover:text-white" routerLink="/home">Home</a>
+            <span>/</span>
+            <span>Brands</span>
+        </nav>
+
+        <div class="flex items-center gap-5">
+            <div class="w-16 h-16 rounded-2xl bg-white flex items-center justify-center">
+                <i class="fa-solid fa-tags text-purple-500 text-3xl"></i>
+            </div>
+
+            <div>
+                <h1 class="text-4xl font-bold">Top Brands</h1>
+                <p class="text-white mt-1">Shop from your favorite brands</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container mx-auto px-4 py-10">
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-5">
+        @for (brand of brandsList()| paginate: { id: 'brandsPagination',
+        itemsPerPage: pageSize(),
+        currentPage: p(),
+        totalItems: total()}; track brand._id) {
+        <a class="group bg-white rounded-2xl border border-gray-100 p-4 sm:p-5 shadow-sm hover:shadow-xl hover:border-violet-200 transition-all duration-300 hover:-translate-y-1"
+            [routerLink]="['/brands-details',brand._id]">
+            <div class="aspect-square rounded-xl overflow-hidden bg-gray-50 mb-3 p-4 flex items-center justify-center">
+                <img alt="Canon"
+                    class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500"
+                    [src]="brand.image">
+            </div>
+            <h3
+                class="font-semibold text-gray-900 text-center text-sm group-hover:text-violet-600 transition-colors truncate">
+                {{brand.name}}</h3>
+            <div class="flex justify-center mt-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
+                <span class="text-xs text-violet-600 flex items-center gap-1">View Products
+                    <i class="fas fa-arrow-right text-[10px]"></i>
+                </span>
+            </div>
+        </a>
+        }
+    </div>
+
+        <div class="flex justify-center my-5">
+        <pagination-controls class="my-pagination" id="brandsPagination" (pageChange)="pageChanged($event)">
+        </pagination-controls>
+    </div>
+</section>

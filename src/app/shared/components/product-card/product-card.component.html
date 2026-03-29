@@ -1,0 +1,58 @@
+<div [routerLink]="['/products-details',data()._id]"
+    class="py-10 bg-white border border-gray-200 rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300 hover:shadow-lg">
+    <div class="relative">
+        <img class="w-full h-60 object-contain bg-white" [src]="data().imageCover" alt="">
+        <div class="absolute top-3 right-3 flex flex-col space-y-2">
+
+            <button
+                class="bg-white h-8 w-8 rounded-full flex items-center justify-center transition shadow-sm text-gray-600 hover:text-red-500"
+                title="Add to wishlist" tabindex="0">
+                <i class="fa-regular fa-heart"></i>
+            </button>
+
+            <button
+                class="bg-white h-8 w-8 rounded-full flex items-center justify-center text-gray-600 hover:text-primary-600 shadow-sm">
+                <i class="fa-solid fa-arrows-rotate"></i>
+            </button>
+            <a [routerLink]="['/products-details',data()._id]"
+                class="bg-white h-8 w-8 rounded-full flex items-center justify-center text-gray-600 hover:text-primary-600 shadow-sm">
+                <i class="fa-solid fa-eye"></i>
+            </a>
+        </div>
+        <div class="absolute top-3 left-3">
+            <span class="bg-red-500 text-white text-sm px-2 py-1 rounded-full font-medium">
+                {{ getDiscount() }}%
+            </span>
+        </div>
+
+    </div>
+    <div class="p-4">
+        <div class="text-xs text-gray-500 mb-1"> {{data().category.name}} </div>
+        <h3 class="font-medium mb-1 cursor-pointer ">
+            <a class="line-clamp-2"> {{data().title.split(' ',1).join(' ')}} </a>
+        </h3>
+
+        <div class="flex items-center gap-0.5 text-yellow-400">
+            @for (star of [].constructor(getStars(data().ratingsAverage).full); track $index) {
+            <i class="fa-solid fa-star text-sm"></i>
+            }
+            @if (getStars(data().ratingsAverage).half) {
+            <i class="fa-solid fa-star-half-stroke text-sm"></i>
+            }
+            @for (star of [].constructor(getStars(data().ratingsAverage).empty); track $index) {
+            <i class="fa-regular fa-star text-sm"></i>
+            }
+        </div>
+        <span class="text-sm text-gray-600">
+            {{ data().ratingsAverage }} ({{ data().ratingsQuantity }} reviews)
+        </span>
+
+        <div class="flex items-center justify-between">
+            <span class="text-lg font-bold text-gray-800"> {{data().price |currency:' EGP'}} </span>
+            <button (click)="addProductToCart(data()._id)"
+                class="size-10 rounded-full flex items-center justify-center transition bg-primary-600 text-white cursor-pointer bg-[#15803D]">
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
+    </div>
+</div>
