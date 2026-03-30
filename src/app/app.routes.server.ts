@@ -1,13 +1,3 @@
-// import { RenderMode, ServerRoute } from '@angular/ssr';
-
-// export const serverRoutes: ServerRoute[] = [
-//   {
-//     path: '**',
-//     renderMode: RenderMode.Prerender
-//   }
-// ];
-
-
 import { RenderMode, ServerRoute } from '@angular/ssr';
 
 export const serverRoutes: ServerRoute[] = [
@@ -17,6 +7,10 @@ export const serverRoutes: ServerRoute[] = [
   },
   {
     path: 'chackout/:cartId',
+    renderMode: RenderMode.Server
+  },
+  {
+    path: 'brands-details/:id',
     renderMode: RenderMode.Server
   },
   {
